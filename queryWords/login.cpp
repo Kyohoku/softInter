@@ -5,6 +5,7 @@
 #include "widget.h"
 #include "sqliteOp.h"
 #include <QMessageBox>
+#include <QKeyEvent>
 
 Login::Login(QWidget *parent) :
     QWidget(parent),
@@ -12,7 +13,10 @@ Login::Login(QWidget *parent) :
 {
     ui->setupUi(this);
     reg=new Register;
+    this->installEventFilter(this);
 }
+
+
 
 Login::~Login()
 {
@@ -36,6 +40,7 @@ void Login::on_pushButton_login_clicked()
     if(!SqliteOp::getDataBase()->queryusername(username))
     {
         QMessageBox::warning(this, tr("提示"),tr("用户名不存在!"));
+        ui->lineEdit_username->setFocus();
         return;
     }
 
@@ -44,6 +49,7 @@ void Login::on_pushButton_login_clicked()
     if(!SqliteOp::getDataBase()->querypassword(username,pwd))
     {
         QMessageBox::warning(this, tr("提示"),tr("用户密码不正确!"));
+        ui->lineEdit_pwd->setFocus();
         return;
     }
 
@@ -57,4 +63,24 @@ void Login::on_pushButton_register_clicked()
 {
     this->close();
     reg->show();
+}
+
+bool Login::eventFilter(QObject *obj, QEvent *event)     //设置快捷键
+{ if (event->type() == QEvent::KeyPress) {
+     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+     if (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter)
+{       // 触发按钮槽函数
+        emit on_pushButton_login_clicked();
+        return true;
+     }
+   }
+ return QWidget::eventFilter(obj, event);
+}
+
+void Login::setUsername(QString name){
+    this->ui->lineEdit_username->setText(name);
+}
+
+void Login::setPwd(QString psw){
+    this->ui->lineEdit_pwd->setText(psw);
 }

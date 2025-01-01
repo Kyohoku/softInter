@@ -16,6 +16,7 @@ public:
     ~Register();
 
     void paintEvent(QPaintEvent *);
+    bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
     void on_pushButton_register_clicked();

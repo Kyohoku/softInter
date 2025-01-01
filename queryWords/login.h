@@ -14,9 +14,13 @@ class Login : public QWidget
 
 public:
     explicit Login(QWidget *parent = nullptr);
-    ~Login();
 
+    ~Login();
+    Ui::Login *ui;
     void paintEvent(QPaintEvent *);
+    bool eventFilter(QObject *obj, QEvent *event);
+    void setUsername(QString name);
+    void setPwd(QString psw);
 
 private slots:
     void on_pushButton_login_clicked();
@@ -24,7 +28,7 @@ private slots:
     void on_pushButton_register_clicked();
 
 private:
-    Ui::Login *ui;
+
     Register *reg; //注册
 };
 
