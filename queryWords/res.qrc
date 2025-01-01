@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/bluebackground.jpg</file>
+        <file>res/bandfouricon.jpg</file>
+        <file>res/bandsixicon.jpg</file>
+        <file>res/backicon.png</file>
+        <file>res/sound0.png</file>
+        <file>res/sound1.png</file>
+        <file>res/sound2.png</file>
+        <file>res/logo.ico</file>
+        <file>res/user.png</file>
+        <file>res/sad.png</file>
+        <file>res/smile.png</file>
+        <file>res/favorite_normal.png</file>
+        <file>res/favorite_pressed.png</file>
+    </qresource>
+</RCC>
